@@ -3,12 +3,14 @@ using UnityEngine.UI;
 using UnityEngine;
 using System.Linq;
 using System.Threading;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
     public Slider sld;
+    public TMP_Text dateText;
     private Date[] sorted_Dates;
     private CubeColor[] allCubeColorScripts;
 
@@ -161,6 +163,18 @@ public class GameManager : MonoBehaviour
         {
             if (sld.value >= i * range && sld.value < (i + 1) * range)
             {
+                int year = this.sorted_Dates[i].Year;
+
+                int monthInt = this.sorted_Dates[i].Month;
+                string month = monthInt < 10 ? "0" + monthInt.ToString() : monthInt.ToString();
+
+                int dayInt = this.sorted_Dates[i].Day;
+                string day = dayInt < 10 ? "0" + dayInt.ToString() : dayInt.ToString();
+
+                string morn = this.sorted_Dates[i].Morning ? "AM" : "PM";
+
+                this.dateText.SetText($"{day}/{month}/{year} {morn}");
+
                 foreach (CubeColor scriptInstance in allCubeColorScripts)
                 {
                     scriptInstance.setup_cube(this.sorted_Dates[i]);
