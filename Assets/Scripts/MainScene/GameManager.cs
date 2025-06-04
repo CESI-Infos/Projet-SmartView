@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 using System.Linq;
-using System.Threading;
 using TMPro;
 
 public class GameManager : MonoBehaviour

@@ -19,6 +19,8 @@ public class MainMenuEvents : MonoBehaviour
         _button_generate_map = _document.rootVisualElement.Q("GenerateMap") as Button;
         _button_select_file.RegisterCallback<ClickEvent>(OnSelectFileClick);
         _button_generate_map.RegisterCallback<ClickEvent>(OnGenerateMapClick);
+
+        _button_generate_map.SetEnabled(false);
     }
 
     private void Onsable()
@@ -41,6 +43,8 @@ public class MainMenuEvents : MonoBehaviour
             VisualElement root = uiDocument.rootVisualElement;
             Label pathLabel = root.Q<Label>("Path");
             pathLabel.text = paths[0];
+
+            _button_generate_map.SetEnabled(true);
         }
         DataSessionManager.instance.SetFile(paths[0]);
     }
@@ -58,7 +62,7 @@ public class MainMenuEvents : MonoBehaviour
 
     private IEnumerator LoadSceneAndConvert()
     {
-        var asyncLoad = SceneManager.LoadSceneAsync("SampleSceneLouis");
+        var asyncLoad = SceneManager.LoadSceneAsync("MainScene");
 
         while (!asyncLoad.isDone)
         {

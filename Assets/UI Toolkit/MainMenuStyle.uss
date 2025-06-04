@@ -19,7 +19,7 @@
     height: 105px;
     background-color: rgb(245, 245, 245);
     font-size: 36px;
-    -unity-font-definition: url("../Fonts/Allerta-Regular.ttf");
+    -unity-font-definition: url("project://database/Assets/Fonts/Allerta-Regular.ttf?fileID=12800000&guid=cabc35fdcb01ba345b47ef75832c22d5&type=3#Allerta-Regular");
     -unity-font-style: bold;
     -unity-text-align: middle-right;
     padding-left: 10%;

@@ -8,8 +8,7 @@ public class CubeColor : MonoBehaviour {
     private Color greenRatioColor;
     private Color orangeRatioColor;
     private Color redRatioColor;
-    private Color administrativeColor;
-    private Color lineactColor;
+    private Color nonReservableColor;
     public float ratio = -1.0f;
     private Dictionary<string, object> infos;
 
@@ -58,8 +57,7 @@ public class CubeColor : MonoBehaviour {
         this.greenRatioColor = new Color(0.0f, 1.0f, 0.0f, 1.0f);
         this.bordeauRatioColor = new Color(109f / 255f, 7.0f / 255f, 26.0f / 255.0f, 1.0f);
         this.neutralRatioColor = new Color(200.0f / 255.0f, 196.0f / 255.0f, 220.0f / 255.0f, 1.0f);
-        this.administrativeColor = new Color(100.0f / 255.0f, 149.0f / 255.0f, 237.0f / 255.0f, 1.0f);
-        this.lineactColor = new Color(75.0f / 255.0f, 0.0f, 130.0f / 255.0f, 1.0f);
+        this.nonReservableColor = new Color(100.0f / 255.0f, 149.0f / 255.0f, 237.0f / 255.0f, 1.0f);
         colorStatic();
     }
 
@@ -71,13 +69,9 @@ public class CubeColor : MonoBehaviour {
 
     public void colorStatic()
     {
-        if (this.infos["LibelleTypeSalle"].ToString() == "Admin")
+        if (this.infos["LibelleTypeSalle"].ToString() == "Non Reservable")
         {
-            GetComponent<Renderer>().material.color = administrativeColor;
-        }
-        else if (this.infos["LibelleTypeSalle"].ToString() == "Lineact")
-        {
-            GetComponent<Renderer>().material.color = lineactColor;
+            GetComponent<Renderer>().material.color = nonReservableColor;
         }
         else
         {
@@ -87,25 +81,28 @@ public class CubeColor : MonoBehaviour {
 
     public void colorCube()
     {
-        if (this.ratio == -1.0f)
+        if (this.infos["LibelleTypeSalle"].ToString() != "Nom Reservable")
         {
-            GetComponent<Renderer>().material.color = neutralRatioColor;
-        }
-        else if (this.ratio > 1.0f)
-        {
-            GetComponent<Renderer>().material.color = bordeauRatioColor;
-        }
-        else if (this.ratio < 1.0f/3.0f)
-        {
-            GetComponent<Renderer>().material.color = redRatioColor;
-        }
-        else if (this.ratio >= 1.0f/3.0f && this.ratio < 2.0f/3.0f)
-        {
-            GetComponent<Renderer>().material.color = orangeRatioColor;
-        }
-        else if (this.ratio >= 2.0f/3.0f && this.ratio < 1.0f)
-        {
-            GetComponent<Renderer>().material.color = greenRatioColor;
+            if (this.ratio == -1.0f)
+            {
+                GetComponent<Renderer>().material.color = neutralRatioColor;
+            }
+            else if (this.ratio > 1.0f)
+            {
+                GetComponent<Renderer>().material.color = bordeauRatioColor;
+            }
+            else if (this.ratio < 1.0f / 3.0f)
+            {
+                GetComponent<Renderer>().material.color = redRatioColor;
+            }
+            else if (this.ratio >= 1.0f / 3.0f && this.ratio < 2.0f / 3.0f)
+            {
+                GetComponent<Renderer>().material.color = orangeRatioColor;
+            }
+            else if (this.ratio >= 2.0f / 3.0f && this.ratio < 1.0f)
+            {
+                GetComponent<Renderer>().material.color = greenRatioColor;
+            }
         }
     }
 
