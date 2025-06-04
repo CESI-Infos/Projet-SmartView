@@ -6,5 +6,6 @@ public class GameInitializer : MonoBehaviour
     {
         ExcelConversionTrigger trigger = new ExcelConversionTrigger(DataSessionManager.instance.GetFile());
         trigger.ConvertExcelFile();
+        FloorManager.Instance.showFloor(0);
     }
 }
