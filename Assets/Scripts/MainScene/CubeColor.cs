@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using UnityEngine.InputSystem.Utilities;
+using System.Linq;
 
 public class CubeColor : MonoBehaviour {
     private Color neutralRatioColor;
@@ -8,7 +10,10 @@ public class CubeColor : MonoBehaviour {
     private Color greenRatioColor;
     private Color orangeRatioColor;
     private Color redRatioColor;
-    private Color nonReservableColor;
+    private Color otherColor;
+    private Color bulleColor;
+    private Color bureauColor;
+    private Color lineactColor;
     public float ratio = -1.0f;
     private Dictionary<string, object> infos;
 
@@ -48,7 +53,10 @@ public class CubeColor : MonoBehaviour {
         List<string[]> datas = Data.ReadCsvAndGetData(csvInfosSalle, transform.name, 0);
 
         if (datas.Count > 0) {
-            this.infos["Capacity"] = float.Parse(datas[0][1].Trim());
+            if (datas[0][1].Trim() != "")
+            {
+                this.infos["Capacity"] = float.Parse(datas[0][1].Trim());
+            }
             this.infos["LibelleTypeSalle"] = datas[0][2].Trim();
         }
 
@@ -57,7 +65,10 @@ public class CubeColor : MonoBehaviour {
         this.greenRatioColor = new Color(0.0f, 1.0f, 0.0f, 1.0f);
         this.bordeauRatioColor = new Color(109f / 255f, 7.0f / 255f, 26.0f / 255.0f, 1.0f);
         this.neutralRatioColor = new Color(200.0f / 255.0f, 196.0f / 255.0f, 220.0f / 255.0f, 1.0f);
-        this.nonReservableColor = new Color(100.0f / 255.0f, 149.0f / 255.0f, 237.0f / 255.0f, 1.0f);
+        this.otherColor = new Color(100.0f / 255.0f, 149.0f / 255.0f, 237.0f / 255.0f, 1.0f);
+        this.bulleColor = new Color(0.0f, 0.0f, 1.0f, 1.0f);
+        this.bureauColor = new Color(249.0f / 255.0f, 255.0f / 255.0f, 255.0f / 255.0f, 1.0f);
+        this.lineactColor = new Color(1.0f, 0.0f, 1.0f, 1.0f);
         colorStatic();
     }
 
@@ -69,9 +80,21 @@ public class CubeColor : MonoBehaviour {
 
     public void colorStatic()
     {
-        if (this.infos["LibelleTypeSalle"].ToString() == "Non Reservable")
+        if (this.infos["LibelleTypeSalle"].ToString() == "Bureau Administratif" || this.infos["LibelleTypeSalle"].ToString() == "Service Informatique")
         {
-            GetComponent<Renderer>().material.color = nonReservableColor;
+            GetComponent<Renderer>().material.color = bureauColor;
+        }
+        else if (this.infos["LibelleTypeSalle"].ToString() == "Bulle")
+        {
+            GetComponent<Renderer>().material.color = bulleColor;
+        }
+        else if (this.infos["LibelleTypeSalle"].ToString() == "FABLAB" || this.infos["LibelleTypeSalle"].ToString() == "Laboratoire éléctrique et numérique" || this.infos["LibelleTypeSalle"].ToString() == "Laboratoire mécanique")
+        {
+            GetComponent<Renderer>().material.color = lineactColor;
+        }
+        else if (this.infos["LibelleTypeSalle"].ToString() == "Salle de pause" || this.infos["LibelleTypeSalle"].ToString() == "Salle de réunion")
+        {
+            GetComponent<Renderer>().material.color = otherColor;
         }
         else
         {
@@ -81,7 +104,8 @@ public class CubeColor : MonoBehaviour {
 
     public void colorCube()
     {
-        if (this.infos["LibelleTypeSalle"].ToString() != "Nom Reservable")
+        string[] libelle = new string[] { "Bureau Administratif", "Service Informatique", "Bulle", "FABLAB", "Laboratoire éléctrique et numérique", "Laboratoire mécanique", "Salle de pause", "Salle de réunion" };
+        if (!libelle.Contains(this.infos["LibelleTypeSalle"].ToString()))
         {
             if (this.ratio == -1.0f)
             {
