@@ -10,14 +10,10 @@ public class GameManager : MonoBehaviour
 
     public Slider sld;
     public TMP_Text dateText;
+    public TMP_InputField dateInput;
     private Date[] sorted_Dates;
     private CubeColor[] allCubeColorScripts;
-
-    void Start()
-    {
-        this.sld.minValue = 0;
-        this.sld.maxValue = 100;
-    }
+    private bool userModifiedInput = false;
 
     void Awake()
     {
@@ -30,6 +26,55 @@ public class GameManager : MonoBehaviour
             Debug.LogWarning("Another instance of GameManager already exist");
             Destroy(gameObject);
             return;
+        }
+        this.userModifiedInput = false;
+    }
+
+    void Start()
+    {
+        this.sld.minValue = 0;
+        this.sld.maxValue = 100;
+        dateInput.onValueChanged.AddListener(OnDateInputChanged);
+        dateInput.onSubmit.AddListener(OnDateInputSubmit);
+    }
+
+    void OnDateInputChanged(string newText)
+    {
+        this.userModifiedInput = true;
+    }
+
+    void OnDateInputSubmit(string newText)
+    {
+        string textDate = this.dateInput.text;
+        string searchDate = textDate.Split(' ')[0];
+        string searchDay = searchDate.Split('/')[0];
+        string searchMonth = searchDate.Split('/')[1];
+        string searchYear = searchDate.Split('/')[2];
+        string searchMorn = textDate.Split(' ')[1];
+
+        int nb_Date = this.sorted_Dates.Length;
+        float range = this.sld.maxValue / nb_Date;
+
+        int i = 0;
+        foreach (Date date in sorted_Dates)
+        {
+            int year = date.Year;
+
+            int monthInt = date.Month;
+            string month = monthInt < 10 ? "0" + monthInt.ToString() : monthInt.ToString();
+
+            int dayInt = date.Day;
+            string day = dayInt < 10 ? "0" + dayInt.ToString() : dayInt.ToString();
+
+            string morn = date.Morning ? "AM" : "PM";
+
+            if (searchDay == day && searchMonth == month && searchYear == year.ToString() && searchMorn == morn)
+            {
+                this.sld.value = i * range;
+                break;
+            }
+
+            i += 1;
         }
     }
 
@@ -52,7 +97,8 @@ public class GameManager : MonoBehaviour
 
         this.sorted_Dates = this.algo_sort_date(allDateArray);
 
-        foreach (Date date in sorted_Dates) {
+        foreach (Date date in sorted_Dates)
+        {
             Debug.Log($"{date.Year}/{date.Month}/{date.Day} {date.Morning}");
         }
 
@@ -133,25 +179,6 @@ public class GameManager : MonoBehaviour
                             remains -= 1;
                         }
                     }
-
-                    /*
-                    int indexOccupation = associatedCubes[0].GetOccupIndexByDate(targetDate);
-                    int remains = associatedCubes[0].Occupations[indexOccupation].Item2;
-                    foreach (Cube_Color cube in associatedCubes)
-                    {
-                        int capacity = int.Parse(cube.Infos["Capacity"].ToString());
-                        int indexOcc = cube.GetOccupIndexByDate(targetDate);
-                        if (remains != 0)
-                        {
-                            cube.SetNbOccupation(indexOcc, 0);
-                        }
-                        else
-                        {
-                            cube.SetNbOccupation(indexOcc, capacity);
-                            remains -= capacity;
-                        }
-                    }
-                    */
                 }
             }
         }
@@ -166,17 +193,28 @@ public class GameManager : MonoBehaviour
         {
             if (sld.value >= i * range && sld.value < (i + 1) * range)
             {
-                int year = this.sorted_Dates[i].Year;
+                Date date = sorted_Dates[i];
+                int year = date.Year;
 
-                int monthInt = this.sorted_Dates[i].Month;
-                string month = monthInt < 10 ? "0" + monthInt.ToString() : monthInt.ToString();
-
-                int dayInt = this.sorted_Dates[i].Day;
+                int dayInt = date.Day;
                 string day = dayInt < 10 ? "0" + dayInt.ToString() : dayInt.ToString();
+                string day_of_week = date.getDay();
 
-                string morn = this.sorted_Dates[i].Morning ? "AM" : "PM";
+                string month_of_year = date.getMonth();
 
-                this.dateText.SetText($"{day}/{month}/{year} {morn}");
+                string morn = date.Morning ? "AM" : "PM";
+
+                this.dateText.SetText($"{day_of_week} {day} {month_of_year} {year} {morn}");
+
+                if (!userModifiedInput)
+                {
+                    int monthInt = date.Month;
+                    string month = monthInt < 10 ? "0" + monthInt.ToString() : monthInt.ToString();
+
+                    dateInput.onValueChanged.RemoveListener(OnDateInputChanged);
+                    this.dateInput.text = $"{day}/{month}/{year} {morn}";
+                    dateInput.onValueChanged.AddListener(OnDateInputChanged);
+                }
 
                 foreach (CubeColor scriptInstance in allCubeColorScripts)
                 {
