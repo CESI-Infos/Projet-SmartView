@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour
         this.sld.maxValue = 100;
         dateInput.onValueChanged.AddListener(OnDateInputChanged);
         dateInput.onSubmit.AddListener(OnDateInputSubmit);
+        dateInput.onEndEdit.AddListener(OnDateInputEnd);
     }
 
     void OnDateInputChanged(string newText)
@@ -76,6 +77,12 @@ public class GameManager : MonoBehaviour
 
             i += 1;
         }
+        this.userModifiedInput = false;
+    }
+
+    void OnDateInputEnd(string newText)
+    {
+        this.userModifiedInput = false;
     }
 
     public void setup()
