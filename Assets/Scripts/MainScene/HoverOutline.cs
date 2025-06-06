@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 [RequireComponent(typeof(OutlineGenerator))]
 public class HoverOutline : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    public float liftAmount = 0.1f;
+    public float liftAmount = 1f;
     public float liftSpeed = 2f;
 
     private OutlineGenerator outline;

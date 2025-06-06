@@ -7,7 +7,7 @@ public class OutlineGenerator : MonoBehaviour
     public Material outlineMaterial;
 
     [Tooltip("Facteur d'agrandissement de l'outline")]
-    public float outlineScale = 1.03f;
+    public float outlineScale = 1.10f;
 
     private GameObject outlineObject;
 
