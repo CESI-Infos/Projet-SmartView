@@ -76,9 +76,11 @@ public class CubeColor : MonoBehaviour {
 
     public void colorStatic()
     {
-        string[] libelle = new string[] { "Bureau administratif", "Service informatique", "FABLAB", "Laboratoire éléctrique et numérique", "Laboratoire mécanique", "Salle de pause", "Salle de réunion" };
+        Debug.Log($"{transform.name} : {this.infos["NomSalle"]}, {this.infos["Capacity"]}, {this.infos["LibelleTypeSalle"]}");
+        string[] libelle = new string[] { "Bureau administratif", "Service informatique", "FABLAB", "Laboratoire electrique et numerique", "Laboratoire mecanique", "Salle de pause", "Salle de reunion", "Non reservable"};
         if (libelle.Contains(this.infos["LibelleTypeSalle"].ToString()))
         {
+            Debug.Log($"{transform.name} : {this.infos["NomSalle"]}, {this.infos["Capacity"]}, {this.infos["LibelleTypeSalle"]}");
             GetComponent<Renderer>().material.color = nonReservableColor;
         }
         else if (this.infos["LibelleTypeSalle"].ToString() == "Bulle")
@@ -93,7 +95,7 @@ public class CubeColor : MonoBehaviour {
 
     public void colorCube()
     {
-        string[] libelle = new string[] { "Bureau administratif", "Service informatique", "Bulle", "FABLAB", "Laboratoire éléctrique et numérique", "Laboratoire mécanique", "Salle de pause", "Salle de réunion" };
+        string[] libelle = new string[] { "Bureau administratif", "Service informatique", "Bulle", "FABLAB", "Laboratoire electrique et numerique", "Laboratoire mecanique", "Salle de pause", "Salle de reunion", "Non reservable"};
         if (!libelle.Contains(this.infos["LibelleTypeSalle"].ToString()))
         {
             if (this.ratio == -1.0f)

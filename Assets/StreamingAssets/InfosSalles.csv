@@ -1,14 +1,14 @@
 NomSalle;CapaciteSalle;LibelleTypeSalle
-E020 ;30;Salles banalisées
+E020 ;30;Salles banalisees
 E033A - Amphi 1;198;Auditorium
 E033B - Amphi 2;116;Auditorium
 N010 - Scale Up Projet 1;42;Scale Up
-N018 FISA;36;Salles banalisées
+N018 FISA;36;Salles banalisees
 N019A - Creativ;16;Salles techniques (FABLAB, créativité,...)
 N019B - Creativ;16;Salles techniques (FABLAB, créativité,...)
-N101A FISA;24;Salles banalisées
+N101A FISA;24;Salles banalisees
 N102 CPI A1;36;Scale Up
-N103B FISA;24;Salles banalisées
+N103B FISA;24;Salles banalisees
 N104A CPI A1;24;Scale Up
 N104B CPI A1;24;Scale Up
 N106 Box;14;Boxes
@@ -25,9 +25,9 @@ N207 Scale Up CPI A2;36;Scale Up
 N208 Scale Up  CPIA2 INFO;36;Scale Up
 N211 Box;12;Boxes
 N212A Scale Up;24;Scale Up
-N212B Scale Up;24;Scale Up
-N214A;24;Salles banalisées
-N214B;24;Salles banalisées
+N212B Scale'Up;24;Scale Up
+N214A;24;Salles banalisees
+N214B;24;Salles banalisees
 N215 Scale Up;36;Scale Up
 N216 Scale Up;36;Scale Up
 N217 Info;24;Salles informatique
@@ -40,21 +40,21 @@ N231 Info;18;Salles informatique
 OPIBUS;36;Scale Up
 S037 Box;16;Boxes
 S157 Box;12;Boxes
-S158;32;Salles banalisées
-S159 en ilots;30;Salles banalisées
-S160  EFM;22;Salles banalisées
-S161 en ilots;30;Salles banalisées
-S162  EFM;22;Salles banalisées
+S158;32;Salles banalisees
+S159 en ilots;30;Salles banalisees
+S160  EFM;22;Salles banalisees
+S161 en ilots;30;Salles banalisees
+S162  EFM;22;Salles banalisees
 S163 Box;12;Boxes
 S222 Info;24;Salles informatique
 S223 en ilots;24;Salles banalisées
 S224 Scale Up;24;Scale Up
 S225 Scale Up;24;Scale Up
-S226 ;28;Salles banalisées
-S227 ;24;Salles banalisées
-S228 ;28;Salles banalisées
-S229A ;30;Salles banalisées
-S229B ;30;Salles banalisées
+S226 ;28;Salles banalisees
+S227 ;24;Salles banalisees
+S228 ;28;Salles banalisees
+S229A ;30;Salles banalisees
+S229B ;30;Salles banalisees
 N116;;Bureau administratif
 N117;;Bureau administratif
 N115  ;;Bureau administratif
@@ -102,15 +102,15 @@ N154;;Bulle
 N155;;Bulle
 N126;;Bulle
 N105;;Bulle
-N112 Box;;Boxes
+N112 Box;12;Boxes
 N001;;FABLAB
 N002;;FABLAB
 N003;;FABLAB
 N005;;FABLAB
 N006;;Bureau administratif
-N007;;Salle de réunion
-N008;;Laboratoire éléctrique et numérique
-N009;;Laboratoire mécanique
+N007;;Salle de reunion
+N008;;Laboratoire electrique et numerique
+N009;;Laboratoire mecanique
 N011;;Bureau administratif
 N012;;Bureau administratif
 N013;;Bureau administratif
@@ -130,3 +130,21 @@ S045;;Bureau administratif
 S046;;Bureau administratif
 S047;;Bureau administratif
 S048;;Service informatique
+E035;;Salle de pause
+E028;;Non reservable
+Plan.092;;Non reservable
+Plan.100;;Non reservable
+Plan.102;;Non reservable
+Plan.103;;Non reservable
+Plan.104;;Non reservable
+Plan.106;;Non reservable
+Plan.107;;Non reservable
+N007;;Non reservable
+N008;;Non reservable
+N009;;Non reservable
+N118;;Bureau administratif
+N156;;Bulle
+N114;;Bureau administratif
+N209;;Bulle
+N210;;Bulle
+N213;;Non reservable

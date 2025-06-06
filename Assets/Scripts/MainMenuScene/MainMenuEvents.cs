@@ -45,8 +45,9 @@ public class MainMenuEvents : MonoBehaviour
             pathLabel.text = paths[0];
 
             _button_generate_map.SetEnabled(true);
+
+            DataSessionManager.instance.SetFile(paths[0]);
         }
-        DataSessionManager.instance.SetFile(paths[0]);
     }
 
     private void OnGenerateMapClick(ClickEvent evt)
