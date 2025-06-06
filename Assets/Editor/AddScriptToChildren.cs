@@ -9,7 +9,7 @@ public static class ToolsForChildren
     const float defaultOutlineScale = 1.1f;
 
     static readonly string[] exclusions = { 
-        // Batiment en général
+        // Bâtiment en général
         "2e étage", "Objet vide", "Ascenseur", "local", "Etage 1", "terrasse", "WC", "WC.001", "WC.002", "WC.003", "WC.004", "WC.005", "WC.006", "WC.007", "RDC", "Cylindre", "Cylindre.001", "Cylindre.002", "Cylindre.003", "Cylindre.004", "Cylindre.005", "Cylindre.006", "Plan.024", "Plan.025", "Plan.026", "Plan.027", "Cube",  
 
         // Deuxième étage 
@@ -38,7 +38,6 @@ public static class ToolsForChildren
         {
             ProcessChildrenRecursive(parent.transform);
         }
-
         AssetDatabase.SaveAssets();
     }
 

@@ -19,7 +19,6 @@ public class MouseCameraController : MonoBehaviour
             Vector3 delta = Input.mousePosition - lastMousePosition;
             float rotationX = -delta.y * rotationSensitivity * Time.deltaTime;
             float rotationY = delta.x * rotationSensitivity * Time.deltaTime;
-
             transform.eulerAngles += new Vector3(rotationX, rotationY, 0f);
         }
 

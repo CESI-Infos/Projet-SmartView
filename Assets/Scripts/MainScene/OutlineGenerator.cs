@@ -19,7 +19,7 @@ public class OutlineGenerator : MonoBehaviour
             return;
         }
 
-        // Créer l'objet enfant
+        // Créer l'enfant Outline
         outlineObject = new GameObject("OutlineObject");
         outlineObject.transform.SetParent(transform);
         outlineObject.transform.localPosition = Vector3.zero;
@@ -29,7 +29,6 @@ public class OutlineGenerator : MonoBehaviour
         // Copier MeshFilter et MeshRenderer
         MeshFilter originalFilter = GetComponent<MeshFilter>();
         MeshRenderer originalRenderer = GetComponent<MeshRenderer>();
-
         MeshFilter outlineFilter = outlineObject.AddComponent<MeshFilter>();
         outlineFilter.sharedMesh = originalFilter.sharedMesh;
 
