@@ -62,8 +62,8 @@ public class CubeColor : MonoBehaviour {
         this.orangeRatioColor = new Color(1.0f, 0.5f, 0.0f, 1.0f);
         this.greenRatioColor = new Color(0.0f, 1.0f, 0.0f, 1.0f);
         this.bordeauRatioColor = new Color(109f / 255f, 7.0f / 255f, 26.0f / 255.0f, 1.0f);
-        this.neutralRatioColor = new Color(200.0f / 255.0f, 196.0f / 255.0f, 220.0f / 255.0f, 1.0f);
-        this.nonReservableColor = new Color(100.0f / 255.0f, 149.0f / 255.0f, 237.0f / 255.0f, 1.0f);
+        this.neutralRatioColor = new Color(254.0f / 255.0f, 225.0f / 255.0f, 49.0f / 255.0f, 1.0f);
+        this.nonReservableColor = new Color(48.0f / 255.0f, 48.0f / 255.0f, 48.0f / 255.0f, 1.0f);
         this.bulleColor = new Color(0.0f, 0.0f, 1.0f, 1.0f);
         colorStatic();
     }
