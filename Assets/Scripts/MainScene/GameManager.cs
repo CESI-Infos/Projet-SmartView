@@ -209,14 +209,16 @@ public class GameManager : MonoBehaviour
 
                 string month_of_year = date.getMonth();
 
-                string morn = date.Morning ? "AM" : "PM";
+                string morn_message = date.Morning ? "Matin" : "Apres-midi";
 
-                this.dateText.SetText($"{day_of_week} {day} {month_of_year} {year} {morn}");
+                this.dateText.SetText($"{day_of_week} {day} {month_of_year} {year} {morn_message}");
 
                 if (!userModifiedInput)
                 {
                     int monthInt = date.Month;
                     string month = monthInt < 10 ? "0" + monthInt.ToString() : monthInt.ToString();
+
+                    string morn = date.Morning ? "AM" : "PM";
 
                     dateInput.onValueChanged.RemoveListener(OnDateInputChanged);
                     this.dateInput.text = $"{day}/{month}/{year} {morn}";
