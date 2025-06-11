@@ -10,6 +10,7 @@ public class CubeColor : MonoBehaviour {
     private Color greenRatioColor;
     private Color orangeRatioColor;
     private Color redRatioColor;
+    private Color zeroRatioColor;
     private Color nonReservableColor;
     private Color bulleColor;
     public float ratio = -1.0f;
@@ -62,6 +63,7 @@ public class CubeColor : MonoBehaviour {
         this.orangeRatioColor = new Color(1.0f, 0.5f, 0.0f, 1.0f);
         this.greenRatioColor = new Color(0.0f, 1.0f, 0.0f, 1.0f);
         this.bordeauRatioColor = new Color(109f / 255f, 7.0f / 255f, 26.0f / 255.0f, 1.0f);
+        this.zeroRatioColor = new Color(1.0f, 0.0f, 185.0f / 255.0f, 1.0f);
         this.neutralRatioColor = new Color(254.0f / 255.0f, 225.0f / 255.0f, 49.0f / 255.0f, 1.0f);
         this.nonReservableColor = new Color(48.0f / 255.0f, 48.0f / 255.0f, 48.0f / 255.0f, 1.0f);
         this.bulleColor = new Color(0.0f, 0.0f, 1.0f, 1.0f);
@@ -106,7 +108,11 @@ public class CubeColor : MonoBehaviour {
             {
                 GetComponent<Renderer>().material.color = bordeauRatioColor;
             }
-            else if (this.ratio < 1.0f / 3.0f)
+            else if (this.ratio == 0.0f)
+            {
+                GetComponent<Renderer>().material.color = zeroRatioColor;
+            }
+            else if (this.ratio > 0.0f && this.ratio < 1.0f / 3.0f)
             {
                 GetComponent<Renderer>().material.color = redRatioColor;
             }
