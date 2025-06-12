@@ -102,7 +102,9 @@ public static class ToolsForChildren
                 tip = go.AddComponent<HoverTip>();
                 Debug.Log($"HoverTip ajouté à: {salleName}");
             }
-            tip.tipToShow = $"NomSalle : {salleName}\nCapacité : {capacity}\nType : {libelle}";
+
+            tip.tipToShow = $"Salle : {salleName}";
+
             EditorUtility.SetDirty(tip);
 
             if (go.GetComponent<MeshFilter>() != null && go.GetComponent<MeshCollider>() == null)
@@ -124,5 +126,11 @@ public static class ToolsForChildren
             return true;
         }
         return false;
+    }
+
+    // Ajout d'une fonction helper pour formater le texte du ratio
+    private static string GetRatioText() 
+    {
+        return "calculé dynamiquement"; // Le ratio réel sera calculé et affiché par CubeColor
     }
 }
