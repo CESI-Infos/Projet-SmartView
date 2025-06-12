@@ -1,8 +1,7 @@
-using System;
 using System.Collections;
-using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using System.Globalization;
 public class HoverTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public string tipToShow;
@@ -21,7 +20,17 @@ public class HoverTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     private void ShowMessage()
     {
-        HoverTipManager.OnMouseHover(tipToShow, Input.mousePosition);
+        var cubeColor = GetComponent<CubeColor>();
+        if (cubeColor != null)
+        {
+            string ratioText = cubeColor.ratio >= 0 ? $"{cubeColor.ratio.ToString("P1", CultureInfo.InvariantCulture)}" : "N/A";
+            string message = $"NomSalle : {gameObject.name}\nRatio d'occupation : {ratioText}";
+            HoverTipManager.OnMouseHover(message, Input.mousePosition);
+        }
+        else
+        {
+            HoverTipManager.OnMouseHover(tipToShow, Input.mousePosition);
+        }
     }
 
     private IEnumerator StartTimer()
