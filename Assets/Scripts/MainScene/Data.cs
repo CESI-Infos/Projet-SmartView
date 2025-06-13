@@ -96,7 +96,7 @@ public class Data
             {
                 string[] values = line.Split(';');
 
-                if (values[searchIndex].Trim().Equals(targetValue, System.StringComparison.OrdinalIgnoreCase))
+                if (NormalizeString(values[searchIndex]).Equals(NormalizeString(targetValue), System.StringComparison.OrdinalIgnoreCase))
                 {
                     string[] trimmedValues = new string[values.Length];
                     for (int i = 0; i < values.Length; i++)
@@ -113,5 +113,14 @@ public class Data
         }
 
         return datas;
+    }
+
+    public static string NormalizeString(string input)
+    {
+        if (input == null) return null;
+        return input
+            .Replace('\u00A0', ' ') // espace insécable → espace normal
+            .Replace('�', ' ')      // caractère inconnu → espace
+            .Trim();
     }
 }
