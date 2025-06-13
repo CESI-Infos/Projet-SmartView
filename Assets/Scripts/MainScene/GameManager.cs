@@ -3,12 +3,15 @@ using UnityEngine.UI;
 using UnityEngine;
 using System.Linq;
 using TMPro;
+using Unity.IntegerTime;
+using System.Globalization;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
     public Slider sld;
+    public TMP_Text total;
     public TMP_Text dateText;
     public TMP_InputField dateInput;
     private Date[] sorted_Dates;
@@ -224,11 +227,24 @@ public class GameManager : MonoBehaviour
                     this.dateInput.text = $"{day}/{month}/{year} {morn}";
                     dateInput.onValueChanged.AddListener(OnDateInputChanged);
                 }
-
+                
+                float count_total = 0;
+                float count_active = 0;
                 foreach (CubeColor scriptInstance in allCubeColorScripts)
                 {
-                    scriptInstance.setup_cube(this.sorted_Dates[i]);
+                    (float, string) infos = scriptInstance.setup_cube(this.sorted_Dates[i]);
+                    string[] libelle = new string[] { "Bureau administratif", "Service informatique", "Bulle", "FABLAB", "Laboratoire electrique et numerique", "Laboratoire mecanique", "Salle de pause", "Salle de reunion", "Non reservable" };
+                    if (!libelle.Contains(infos.Item2.ToString()))
+                    {
+                        count_total += 1.0f;
+                    }
+                    if (infos.Item1 != -1.0f)
+                    {
+                        count_active += 1.0f;
+                    }
                 }
+                this.total.text = $"{(count_active/count_total).ToString("P1", CultureInfo.InvariantCulture)}";
+                break;
             }
         }
     }

@@ -3,6 +3,7 @@ using UnityEngine;
 using System.IO;
 using UnityEngine.InputSystem.Utilities;
 using System.Linq;
+using Unity.VisualScripting;
 
 public class CubeColor : MonoBehaviour {
     private Color neutralRatioColor;
@@ -143,25 +144,31 @@ public class CubeColor : MonoBehaviour {
         return index;
     }
 
-    public void setup_cube(Date search_date) {
+    public (float, string) setup_cube(Date search_date)
+    {
         int index = -1;
         int i = 0;
-        foreach (Date date in this._dates) {
-            if (date.Year == search_date.Year && 
-              date.Month == search_date.Month && 
-              date.Day == search_date.Day && 
+        foreach (Date date in this._dates)
+        {
+            if (date.Year == search_date.Year &&
+              date.Month == search_date.Month &&
+              date.Day == search_date.Day &&
               date.Morning == search_date.Morning)
-                {
+            {
                 index = i;
                 break;
             }
             i++;
         }
-        if (index != -1) {
+        if (index != -1)
+        {
             this.ratio = occupations[index].Item2 / float.Parse(this.infos["Capacity"].ToString());
-        }else {
+        }
+        else
+        {
             this.ratio = -1.0f;
         }
+        return (this.ratio, this.infos["LibelleTypeSalle"].ToString());
     }
 
     public void onClick()
