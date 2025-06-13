@@ -104,11 +104,6 @@ public class GameManager : MonoBehaviour
 
         this.sorted_Dates = this.algo_sort_date(allDateArray);
 
-        foreach (Date date in sorted_Dates)
-        {
-            Debug.Log($"{date.Year}/{date.Month}/{date.Day} {date.Morning}");
-        }
-
         List<(Date, List<CubeColor>)> link = this.link_date_cube();
         this.manage_multiple(link);
     }
