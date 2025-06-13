@@ -21,7 +21,6 @@ public class CubeColor : MonoBehaviour {
     }
 
     private List<(string, int)> occupations;
-
     public List<(string, int)> Occupations
     {
         get { return occupations; }
@@ -46,10 +45,11 @@ public class CubeColor : MonoBehaviour {
 
         this.infos.Add("NomSalle", transform.name);
         this.infos.Add("Capacity", 1.0f);
-        this.infos.Add("LibelleTypeSalle", "");
+        this.infos.Add("LibelleTypeSalle", "Mauvais Libelle");
 
         string csvInfosSalle = Path.Combine(Application.streamingAssetsPath, "InfosSalles.csv");
-        List<string[]> datas = Data.ReadCsvAndGetData(csvInfosSalle, transform.name, 0);
+        string salleNomNormalise = Data.NormalizeString(transform.name);
+        List<string[]> datas = Data.ReadCsvAndGetData(csvInfosSalle, salleNomNormalise, 0);
 
         if (datas.Count > 0) {
             if (datas[0][1].Trim() != "")
@@ -78,11 +78,9 @@ public class CubeColor : MonoBehaviour {
 
     public void colorStatic()
     {
-        Debug.Log($"{transform.name} : {this.infos["NomSalle"]}, {this.infos["Capacity"]}, {this.infos["LibelleTypeSalle"]}");
         string[] libelle = new string[] { "Bureau administratif", "Service informatique", "FABLAB", "Laboratoire electrique et numerique", "Laboratoire mecanique", "Salle de pause", "Salle de reunion", "Non reservable"};
         if (libelle.Contains(this.infos["LibelleTypeSalle"].ToString()))
         {
-            Debug.Log($"{transform.name} : {this.infos["NomSalle"]}, {this.infos["Capacity"]}, {this.infos["LibelleTypeSalle"]}");
             GetComponent<Renderer>().material.color = nonReservableColor;
         }
         else if (this.infos["LibelleTypeSalle"].ToString() == "Bulle")
