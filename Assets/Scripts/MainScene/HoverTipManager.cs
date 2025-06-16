@@ -21,7 +21,7 @@ public class HoverTipManager: MonoBehaviour
         OnMouseHover -= ShowTip;
         OnMouseLoseFocus -= HideTip;
     }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    
     void Start()
     {
         HideTip();
