@@ -119,7 +119,7 @@ public class CubeColor : MonoBehaviour {
             {
                 GetComponent<Renderer>().material.color = orangeRatioColor;
             }
-            else if (this.ratio >= 2.0f / 3.0f && this.ratio < 1.0f)
+            else if (this.ratio >= 2.0f / 3.0f && this.ratio <= 1.0f)
             {
                 GetComponent<Renderer>().material.color = greenRatioColor;
             }

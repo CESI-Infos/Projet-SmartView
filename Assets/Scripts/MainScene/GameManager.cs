@@ -11,6 +11,14 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     public Slider sld;
+    /**/
+    public TMP_Text red;
+    public TMP_Text orange;
+    public TMP_Text green;
+    public TMP_Text bordeau;
+    public TMP_Text zero;
+    public TMP_Text neutral;
+    /**/
     public TMP_Text total;
     public TMP_Text dateText;
     public TMP_InputField dateInput;
@@ -239,6 +247,51 @@ public class GameManager : MonoBehaviour
                     }
                 }
                 this.total.text = $"{(count_active/count_total).ToString("P1", CultureInfo.InvariantCulture)}";
+
+                /**/
+                float count_red = 0;
+                float count_orange = 0;
+                float count_green = 0;
+                float count_bordeau = 0;
+                float count_zero = 0;
+                float count_neutral = 0;
+                foreach (CubeColor scriptInstance in allCubeColorScripts)
+                {
+                    (float, string) infos = scriptInstance.setup_cube(this.sorted_Dates[i]);
+                    string[] libelle = new string[] { "Bureau administratif", "Service informatique", "Bulle", "FABLAB", "Laboratoire electrique et numerique", "Laboratoire mecanique", "Salle de pause", "Salle de reunion", "Non reservable" };
+                    if (!libelle.Contains(infos.Item2.ToString()) && infos.Item1 == -1.0f)
+                    {
+                        count_neutral += 1.0f;
+                    }
+                    if (infos.Item1 == 0.0f)
+                    {
+                        count_zero += 1.0f;
+                    }
+                    if (infos.Item1 < 1.0f / 3.0f && infos.Item1 > 0.0f)
+                    {
+                        count_red += 1.0f;
+                    }
+                    if (infos.Item1 >= 1.0f / 3.0f && infos.Item1 < 2.0f / 3.0f)
+                    {
+                        count_orange += 1.0f;
+                    }
+                    if (infos.Item1 >= 2.0f / 3.0f && infos.Item1 <= 1.0f)
+                    {
+                        count_green += 1.0f;
+                    }
+                    if (infos.Item1 > 1.0f)
+                    {
+                        count_bordeau += 1.0f;
+                    }
+                }
+                this.red.text = $"{(count_red/count_total).ToString("P1", CultureInfo.InvariantCulture)}";
+                this.orange.text = $"{(count_orange/count_total).ToString("P1", CultureInfo.InvariantCulture)}";
+                this.green.text = $"{(count_green/count_total).ToString("P1", CultureInfo.InvariantCulture)}";
+                this.bordeau.text = $"{(count_bordeau/count_total).ToString("P1", CultureInfo.InvariantCulture)}";
+                this.zero.text = $"{(count_zero/count_total).ToString("P1", CultureInfo.InvariantCulture)}";
+                this.neutral.text = $"{(count_neutral/count_total).ToString("P1", CultureInfo.InvariantCulture)}";
+                /**/
+
                 break;
             }
         }
